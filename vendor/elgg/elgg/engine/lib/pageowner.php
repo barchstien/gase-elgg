@@ -49,7 +49,7 @@ function elgg_get_page_owner_guid($guid = 0) {
 /**
  * Gets the owner entity for the current page.
  *
- * @return \ElggUser|\ElggGroup|false The current page owner or false if none.
+ * @return \ElggEntity|false The current page owner or false if none.
  *
  * @since 1.8.0
  */
@@ -59,12 +59,7 @@ function elgg_get_page_owner_entity() {
 		return false;
 	}
 
-	$owner = get_entity($guid);
-	if ($owner instanceof ElggUser || $owner instanceof ElggGroup) {
-		return $owner;
-	}
-
-	return false;
+	return get_entity($guid);
 }
 
 /**
@@ -137,16 +132,8 @@ function default_page_owner_handler($hook, $entity_type, $returnvalue, $params) 
 		}
 	}
 
-	// ignore root and query
-	$uri = current_page_url();
-	$path = str_replace(elgg_get_site_url(), '', $uri);
-	$path = trim($path, "/");
-	if (strpos($path, "?")) {
-		$path = substr($path, 0, strpos($path, "?"));
-	}
-
 	// @todo feels hacky
-	$segments = explode('/', $path);
+	$segments = _elgg_services()->request->getUrlSegments();
 	if (isset($segments[1]) && isset($segments[2])) {
 		switch ($segments[1]) {
 			case 'owner':
