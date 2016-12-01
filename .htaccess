@@ -133,3 +133,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?__elgg_uri=$1 [QSA,L]
 
 </IfModule>
+
+AuthType Basic
+AuthName "Stop ! Dev Area"
+#AuthUserFile /var/www/elgg_dev/.htpasswd
+AuthUserFile /Users/adrien/Documents/Dev/Web/gase-elgg/.htpasswd
+Require valid-user
