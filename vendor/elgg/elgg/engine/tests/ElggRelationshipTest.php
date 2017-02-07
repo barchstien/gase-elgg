@@ -109,13 +109,10 @@ class ElggRelationshipTest extends ElggCoreUnitTest {
 		$this->assertTrue(add_entity_relationship($this->entity1->guid, 'test_relationship', $this->entity2->guid));
 		$r = check_entity_relationship($this->entity1->guid, 'test_relationship', $this->entity2->guid);
 		$this->assertIsA($r, 'ElggRelationship');
-		$old_id = $r->id;
 		
 		// note - string because that's how it's returned when getting a new object
 		$r->guid_two = (string) $this->entity3->guid;
-		$new_id = $r->save();
-		$this->assertIsA($new_id, 'int');
-		$this->assertNotEqual($new_id, $old_id);
+		$this->assertTrue($r->save());
 		
 		$test_r = check_entity_relationship($this->entity1->guid, 'test_relationship', $this->entity3->guid);
 		$this->assertIsA($test_r, 'ElggRelationship');

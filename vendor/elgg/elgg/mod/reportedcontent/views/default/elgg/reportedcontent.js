@@ -1,7 +1,6 @@
 define(function (require) {
-	var elgg = require('elgg');
-	var $ = require('jquery');
-	var spinner = require('elgg/spinner');
+	var elgg = require('elgg'),
+		$ = require('jquery');
 
 	$('.elgg-menu-item-report-this a, .elgg-menu-item-reportuser a').each(function () {
 		if (!/address=/.test(this.href)) {
@@ -14,8 +13,6 @@ define(function (require) {
 		e.preventDefault();
 		var $form = $(this);
 		elgg.action($form[0].action, {
-			beforeSend: spinner.start,
-			complete: spinner.stop,
 			data: $form.serialize(),
 			success: function (data) {
 				if (data.status == 0) {
@@ -58,8 +55,6 @@ define(function (require) {
 
 		var action = $clicked.data('elggAction');
 		elgg.action(action.name, {
-			beforeSend: spinner.start,
-			complete: spinner.stop,
 			data: action.data,
 			success: function (data) {
 				if (data.status == -1) {

@@ -3,12 +3,11 @@ elgg.provide('elgg.comments');
 
 /**
  * @param {Number} guid
- * @param {jQuery} item
  * @constructor
  */
-elgg.comments.Comment = function (guid, item) {
+elgg.comments.Comment = function (guid) {
 	this.guid = guid;
-	this.$item = item;
+	this.$item = $('#elgg-object-' + guid);
 };
 
 elgg.comments.Comment.prototype = {
@@ -122,7 +121,7 @@ elgg.comments.init = function() {
 			guid;
 		if (!dc) {
 			guid = this.href.split('/').pop();
-			dc = new elgg.comments.Comment(guid, $(this).closest('.elgg-item-object-comment'));
+			dc = new elgg.comments.Comment(guid);
 			$(this).data('Comment', dc);
 		}
 		dc.toggleEdit();

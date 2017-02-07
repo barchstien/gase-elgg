@@ -73,7 +73,7 @@ function pages_prepare_parent_breadcrumbs($page) {
 
 /**
  * Produce the navigation tree
- * 
+ *
  * @param ElggEntity $container Container entity for the pages
  *
  * @return array
@@ -134,7 +134,7 @@ function pages_get_navigation_tree($container) {
 
 /**
  * Register the navigation menu
- * 
+ *
  * @param ElggEntity $container Container entity for the pages
  */
 function pages_register_navigation_tree($container) {
@@ -145,25 +145,32 @@ function pages_register_navigation_tree($container) {
 				'name' => $page['guid'],
 				'text' => $page['title'],
 				'href' => $page['url'],
-				'parent_name' => $page['parent_guid'],
+				'parent_name' => elgg_extract('parent_guid', $page),
 			));
 		}
 	}
 }
 
 /**
- * Function checking delete permission
+ * Can the user delete the page?
  *
- * @package ElggPages
- * @param mixed $value
+ * @param ElggObject $page Page/page-top object
  *
  * @return bool
  */
 function pages_can_delete_page($page) {
-	if (! $page) {
+	if (!pages_is_page($page)) {
 		return false;
-	} else {
-		$container = get_entity($page->container_guid);
-		return $container ? $container->canEdit() : false;
 	}
+	/* @var ElggObject $page */
+
+	$user = elgg_get_logged_in_user_entity();
+	if ($user) {
+		if ($user->guid == $page->owner_guid || $user->isAdmin()) {
+			return true;
+		}
+	}
+
+	$container = $page->getContainerEntity();
+	return $container ? $container->canEdit() : false;
 }

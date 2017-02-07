@@ -60,35 +60,30 @@ class ElggFileCache extends \ElggCache {
 	/**
 	 * Create a sanitised filename for the file.
 	 *
-	 * @param string $key The filename
+	 * @deprecated 1.8 Use \ElggFileCache::sanitizeFilename()
+	 *
+	 * @param string $filename The filename
 	 *
 	 * @return string
-	 * @deprecated 1.8 Use \ElggFileCache::sanitizeFilename()
 	 */
-	protected function sanitise_filename($key) {
-		return $this->sanitizeFilename($key);
+	protected function sanitise_filename($filename) {
+		// @todo : Writeme
+
+		return $filename;
 	}
 	// @codingStandardsIgnoreEnd
 
 	/**
 	 * Create a sanitised filename for the file.
 	 *
-	 * @param string $key The filename
+	 * @param string $filename The filename
 	 *
 	 * @return string
 	 */
-	protected function sanitizeFilename($key) {
-		// handles all keys in use by core
-		if (preg_match('~^[a-zA-Z0-9\-_\.]{1,250}$~', $key)) {
-			return $key;
-		}
+	protected function sanitizeFilename($filename) {
+		// @todo : Writeme
 
-		$key = md5($key);
-
-		// prevent collision with un-hashed keys
-		$key = "=" . $key;
-
-		return $key;
+		return $filename;
 	}
 
 	/**

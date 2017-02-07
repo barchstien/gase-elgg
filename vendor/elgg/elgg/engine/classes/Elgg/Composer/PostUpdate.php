@@ -10,11 +10,11 @@ class PostUpdate {
 	/**
 	 * Todo
 	 *
-	 * @param PackageEvent $event The Composer event (install/upgrade)
+	 * @param Event $event The Composer event (install/upgrade)
 	 *
 	 * @return void
 	 */
-	public static function execute(PackageEvent $event) {
+	public static function execute(Event $event) {
 
 	}
 }

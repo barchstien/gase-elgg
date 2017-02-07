@@ -24,20 +24,23 @@ function ckeditor_init() {
 
 	// need to set basepath early
 	elgg_extend_view('elgg.js', 'elgg/ckeditor/set-basepath.js');
-
+	
 	elgg_extend_view('input/longtext', 'ckeditor/init');
-
-	elgg_extend_view('embed/embed.js', 'elgg/ckeditor/insert.js');
 
 	elgg_register_plugin_hook_handler('register', 'menu:longtext', 'ckeditor_longtext_menu');
 }
 
 function ckeditor_longtext_menu($hook, $type, $items, $vars) {
 
+	$id = elgg_extract('id', $vars);
+	if ($id === null) {
+		return;
+	}
+	
 	$items[] = ElggMenuItem::factory(array(
 		'name' => 'ckeditor_toggler',
 		'link_class' => 'ckeditor-toggle-editor elgg-longtext-control hidden',
-		'href' => "#{$vars['id']}",
+		'href' => "#{$id}",
 		'text' => elgg_echo('ckeditor:html'),
 	));
 
