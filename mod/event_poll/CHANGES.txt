@@ -1,0 +1,34 @@
+Changelog
+=========
+
+2.0.0
+-----
+
+- Updated for Elgg 2.0 (therefore should also work on future Elgg 2.X versions).
+
+1.10.0
+------
+
+- Requires Elgg 1.10 at minimum,
+- Requires version 1.10.3 of Event Calendar plugin at minimum,
+- Conversion all JS code to AMD modules,
+- composer.json added,
+- Usage of input/dropdown changed to input/select.
+
+1.9.0
+-----
+
+- Updated to work on Elgg 1.9 - 1.11 (requires Elgg 1.9 at minimum),
+- Use of colorbox instead of fancybox for event details popup on edit event poll page,
+- Adjustments for UI to work also with Aalborg theme,
+- Sending of on-site messages instead of on-site notifications (new on-site notifications of Elgg 1.9 won't allow any message texts but only "subject" lines which seem not enough in this case in my opinion),
+- Fix of deprecation issues.
+
+1.8.0
+-----
+
+- Made to work on Elgg 1.8 (requires Elgg 1.8 at minimum),
+- Cleanup of code,
+- Revised UI (add/edit event poll view, event polls list view, event poll vote view, menu entries),
+- Editing of event polls not yet implemented but fixed code to correctly fully reset an event poll when editing the event,
+- German translations added.
